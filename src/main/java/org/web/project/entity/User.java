@@ -1,11 +1,11 @@
-package org.web.bookShop.entity;
+package org.web.project.entity;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class AuthorizedUser {
+public class User {
     private String login;
     private String password;
     private String name;

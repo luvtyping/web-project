@@ -1,4 +1,4 @@
-package org.web.bookShop.entity;
+package org.web.project.entity;
 
 import lombok.Data;
 

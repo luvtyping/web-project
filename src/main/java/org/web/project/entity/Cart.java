@@ -1,9 +1,9 @@
-package org.web.bookShop.entity;
+package org.web.project.entity;
 
 import lombok.Data;
 
 @Data
-public class Cart {//BookInCart -> Cart
+public class Cart {
     private String userLogin;
     private String bookName;
 }

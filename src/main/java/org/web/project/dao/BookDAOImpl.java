@@ -1,12 +1,13 @@
-package org.web.bookShop.dao;
+package org.web.project.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.web.bookShop.entity.Book;
-import org.web.bookShop.mappers.BookMapper;
+import org.web.project.entity.Book;
+import org.web.project.mappers.BookMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -31,7 +32,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public boolean createBook(Book book) {
+    public boolean addBook(Book book) {
         int updateBooks = jdbcTemplate.update("INSERT INTO books VALUES(?,?,?,?,?)",
                 book.getName(),
                 book.getAuthor(),
@@ -44,6 +45,19 @@ public class BookDAOImpl implements BookDAO {
                 book.getGenre()
         );
         return (updateBooks != 0 && updateBooksGenres != 0);
+    }
+
+    @Override
+    public List<Book> getBooksBySearchFilters(String name, String author, String price, String genre) {
+        String bookName = name.equals("") ? "%" : name;
+        String bookAuthor = author.equals("") ? "%" : author;
+        String bookGenre = genre.equals("") ? "%" : genre;
+        int bookPrice = price.equals("") ? Integer.MAX_VALUE : Integer.parseInt(price);
+
+        return jdbcTemplate.query(
+                "SELECT * FROM books JOIN books_genres ON books.book_name=books_genres.book_name " +
+                        "WHERE books.book_name LIKE ? AND genre LIKE ? AND author LIKE ?",
+                bookMapper, bookName, bookGenre, bookAuthor, bookPrice);
     }
 
 

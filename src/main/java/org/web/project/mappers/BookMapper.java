@@ -1,8 +1,8 @@
-package org.web.bookShop.mappers;
+package org.web.project.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.web.bookShop.entity.Book;
+import org.web.project.entity.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

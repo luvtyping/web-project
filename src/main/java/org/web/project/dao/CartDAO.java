@@ -1,6 +1,6 @@
-package org.web.bookShop.dao;
+package org.web.project.dao;
 
-import org.web.bookShop.entity.Cart;
+import org.web.project.entity.Cart;
 
 import java.util.List;
 
