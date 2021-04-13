@@ -9,21 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.web.project.service.BookService;
 
 @RestController
-public class BookSearchController {
+public class BookPopupController {
     @Autowired
     private BookService bookService;
     @Autowired
     private ObjectMapper objectMapper;
 
-    @GetMapping("/search")
-    public String getBooksByFilters(@RequestParam(value = "name", required = false) String name,
-                                    @RequestParam(value = "author", required = false) String author,
-                                    @RequestParam(value = "genre", required = false) String genre,
-                                    @RequestParam(value = "price", required = false) String price) {
+    @GetMapping("/popup")
+    public String getBookPopup(@RequestParam String name) {
         String json = "";
         try {
-            json = objectMapper.writeValueAsString(
-                    bookService.getBooksBySearchFilters(name, author, price, genre));
+            json = objectMapper.writeValueAsString(bookService.getBookByName(name));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
