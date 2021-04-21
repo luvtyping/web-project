@@ -1,0 +1,190 @@
+body {
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: auto;
+    -webkit-background-size: cover;
+}
+
+.userMenu {
+    opacity: 0.4;
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    background-color: white;
+}
+
+.userName{
+    font-family: "Sofia", sans-serif;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.menuButtonsPosition{
+    display: flex;
+}
+
+.menuButtons {
+    font-size: 15px;
+    height: 40px;
+    width: 100px;
+    border-radius: 100px;
+    display: flex;
+    background-color: #FFAB57;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.menuButtons:hover{
+    box-shadow: 5px 5px 5px grey;
+}
+
+.redirectIcon {
+    height: 80px;
+    width: 80px;
+    border: 3px solid white;
+    position: absolute;
+    border-radius: 100px;
+    display: flex;
+    background-color: #FFAB57;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 30px;
+    position: ;
+}
+
+.redirectIcon:hover {
+    animation-name: cartAnimation;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes cartAnimation{
+0%, 50%, 100% {
+    transform: rotate(0deg);
+    }
+10%, 30% {
+    transform: rotate(-15deg);
+    }
+20%, 40% {
+    transform: rotate(20deg);
+    }
+}
+
+.itemCounter {
+    color: white;
+    font-size: 1.3em;
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    text-align: center;
+    height: 22px;
+    width: 22px;
+    border-radius: 10px;
+    background-color: red;
+}
+
+.material-icons.md-48{
+    font-size: 48px;
+    color: white;
+}
+
+#bookName{
+    font-family: "Trirong", serif;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 80px;
+    color: white;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.imageBackground {
+    background: transparent;
+    border: 0;
+}
+
+.searchButton {
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    font-size: 20px;
+    background-color: #FFAB57;
+    margin-bottom: 10px;
+}
+
+.filterLine {
+    width: 15%;
+    height: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-right: 25px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.formPosition {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto
+}
+
+.dropList{
+    margin-bottom: 10px;
+    margin-right: 25px;
+    font-size: 20px;
+    width: 15%;
+    height: 26px;
+    text-align: center;
+    opacity: 0.8;
+    color: grey;
+}
+
+.booksDisplay {
+	margin-top: 50px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bookPictureWrapper {
+    border-radius: 50px ;
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+    background: linear-gradient(10deg, #EEFEEC, #467E3E);
+    border-bottom: 3px solid black;
+}
+
+.bookPicture {
+    height: 90%;
+}
+
+.bookName {
+    margin-top: 7px;
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Comfortaa', cursive;
+    font-size: 25px;
+}
+
+.bookPanel {
+    border-radius: 50px;
+    color: black;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    width: 400px;
+    height: 350px;
+    background: white;
+}
+
+.bookPanel:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}

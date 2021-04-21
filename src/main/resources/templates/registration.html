@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link href="../static/css/authentication.css" th:href="@{/css/authentication.css}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="formPosition">
+    <div class="formWindow">
+        <div class="formFields">
+            <form class="formFields" th:method="POST" th:action="@{/registration/proceed}" th:object="${user}">
+                <h3>Регистрация пользователя</h3>
+
+                <input class="fields" type="text" th:field="*{login}" placeholder="Логин"/>
+                <div class="error" th:if="${#fields.hasErrors('login')}"
+                     th:errors="*{login}"></div>
+
+                <input class="fields" type="password" th:field="*{password}" placeholder="Пароль"/>
+                <div class="error" th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}"></div>
+
+                <input class="fields" type="text" th:field="*{name}" placeholder="Имя"/>
+                <div class="error" th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}"></div>
+
+                <input type="date" th:field="*{birthdate}" placeholder="Дата рождения"/>
+                <div class="error" th:if="${#fields.hasErrors('birthdate')}"
+                     th:errors="*{birthdate}"></div>
+
+                <label class="select" for="roles"></label>
+                <select class="dropList" id="roles" th:field="*{role}">
+                    <option value="USER">Покупатель</option>
+                    <option value="MANAGER">Директор</option>
+                </select>
+
+                <div class="error" th:text="${errorMessage}"></div>
+                <button class="loginButton" type="submit">Зарегистрироваться</button>
+            </form>
+
+            <form th:method="GET" th:action="@{/login}">
+                <button class="link haveAcc" type="submit">Уже зарегистрированы?</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

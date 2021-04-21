@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="../static/css/authentication.css" th:href="@{/css/authentication.css}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="formPosition">
+    <div class="formWindow">
+        <div class="formFields">
+            <form class="formFields" th:method="POST" th:action="@{/login/process}">
+                <h3>Введите логин и пароль</h3>
+                <input class="fields" type="text" name="login" placeholder="Логин">
+                <input class="fields" type="password" name="password" placeholder="Пароль">
+                <div class="error" th:text="${errorMessage}"></div>
+                <button class="loginButton" type="submit">Войти</button>
+            </form>
+            <form th:method="GET" th:action="@{/registration}">
+                <input class="link haveAcc" type="submit" value="Нет аккаунта?">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

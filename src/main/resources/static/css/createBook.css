@@ -1,0 +1,38 @@
+.creationForm {
+    opacity: 0.8;
+    padding: 10px 10px 10px 10px;
+    width: 50%;
+    margin: auto;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+#header {
+    margin: auto;
+    margin-bottom: 5px;
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    font-size: 30px;
+}
+
+.error{
+    color:red;
+    font-size: 12px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+

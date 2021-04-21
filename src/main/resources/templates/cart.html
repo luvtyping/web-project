@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link href="../static/css/popup.css" th:href="@{/css/popup.css}" rel="stylesheet"/>
+    <link href="../static/css/createBook.css" th:href="@{/css/createBook.css}" rel="stylesheet"/>
+    <link href="../static/css/cart.css" th:href="@{/css/cart.css}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../static/js/index.js" th:src="@{js/index.js}" type="text/javascript"></script>
+    <script src="../static/js/popup.js" th:src="@{js/popup.js}" type="text/javascript"></script>
+    <script src="../static/js/cart.js" th:src="@{js/cart.js}" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="userMenu">
+    <div class="userName"> Welcome, <span id="login" th:text="${login}">Name</span>!</div>
+    <div class="menuButtonsPosition">
+        <form th:method="GET" th:action="@{/logout}">
+            <button class="menuButtons" type="submit">Выйти</button>
+        </form>
+    </div>
+</div>
+
+<form class="redirectIcon" th:method="GET" th:action="@{/}">
+    <button class="imageBackground" style="cursor: pointer">
+        <span class="material-icons md-48">home</span>
+    </button>
+</form>
+
+<form class="popup" id="popup">
+    <div class="closeIcon">
+        <a><span class="material-icons" style="cursor: pointer">close</span></a>
+    </div>
+    <img class="bookPictureInPopup" src="../static/img/book.jpg" th:src="@{img/book.jpg}">
+    <div class="bookDescription">
+        <h3 class="bookName" id="bookNameInPopup">Book Name</h3>
+        <p>Автор: <span id="bookAuthorInPopup"></span></p>
+        <p>Жанр: <span id="bookGenreInPopup"></span></p>
+        <p>Год: <span id="bookPublishYearInPopup"></span></p>
+        <hr/>
+        <p>Содержание: <span id="bookDescriptionInPopup"></span></p>
+        <p class="price">Стоимость: <span id="bookPriceInPopup"></span> руб</p>
+        <a class="menuButtons" id="deleteFromTheCart" style="cursor: pointer">Удалить</a>
+    </div>
+</form>
+
+<h3 class="cartDisplay">Корзина</h3>
+<div class="cartDisplay">
+    <div th:each="book : ${cartItem}">
+        <button class="bookEntity" th:value="${book.getName()}">
+            <div class="picBookInCart">
+                <img class="bookPicture" src="../static/img/book.jpg" th:src="@{img/book.jpg}">
+            </div>
+            <p class="bookName" th:text="${book.getName()}">BookName</p>
+            <div class="priceInCart">
+                <p><span class="bookPrice" th:text="${book.getPrice()}"></span> руб</p>
+            </div>
+        </button>
+    </div>
+</div>
+
+<div class="totalPrice">
+    <a class="buyButton" id="buyButton" style="cursor: pointer">
+        <p>Оплатить <span id="totalPrice"></span> руб</p>
+    </a>
+</div>
+
+<div class="notification" id="notification"></div>
+
+</body>
+</html>
