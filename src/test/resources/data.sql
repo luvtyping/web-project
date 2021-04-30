@@ -1,17 +1,20 @@
-INSERT INTO books VALUES('book 1',1999,'Short description.',1299,'Author R.T.');
-INSERT INTO books_genres VALUES('book 1','Роман');
+insert into books values('Book one',1999,'Short description of book one.',1299,'Author A.');
+insert into books_genres values('Book one','Роман');
 
-INSERT INTO books VALUES('book 2',2000,'Short description.',1499,'Second Author');
-INSERT INTO books_genres VALUES('book 2','Драма');
+insert into books values('Book two',2021,'Short description of book two.',1499,'Author B.');
+insert into books_genres values('Book two','Драма');
 
-INSERT INTO books VALUES('book 3',1999,'Short description.',1600,'Author R.T.');
-INSERT INTO books_genres VALUES('book 3','Детектив');
+insert into books values('Book three',1999,'Short description of book three.',1600,'Author A.');
+insert into books_genres values('Book three','Детектив');
 
-INSERT INTO books VALUES('book 4',1999,'Short description.',1100,'Author');
-INSERT INTO books_genres VALUES('book 4','Роман');
+insert into books values('Book four',2021,'Short description of book four.',1100,'Author C.');
+insert into books_genres values('Book four','Роман');
 
-INSERT INTO users VALUES('name1','2021-01-01','user1login','USER');
-INSERT INTO authorized_data VALUES ('user1login','password1');
+insert into  users values('name1','2021-01-01','user1login','USER');
+insert into  authorized_data values ('user1login','password1');
 
-INSERT INTO cart VALUES (1,'user1login','book 3');
-INSERT INTO cart VALUES (2,'user1login','book 3');
+insert into  cart values  (1,'user1login','Book three');
+insert into  cart values  (2,'user1login','Book three');
+insert into  cart values  (3,'user1login','Book one');
+insert into  cart values  (4,'user1login','Book two');
+insert into  cart values  (5,'user1login','Book four');

@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS books (
   book_name VARCHAR(255) NOT NULL PRIMARY KEY ,
   publishYear INT NULL,
   description VARCHAR(100) NULL,
-  price DECIMAL NULL,
-  author VARCHAR(255) NULL
+  price DECIMAL NOT NULL,
+  author VARCHAR(255) NOT NULL
   );
 
 CREATE TABLE IF NOT EXISTS cart (
