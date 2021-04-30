@@ -32,6 +32,7 @@ class UserDAOImplTest {
     @Test
     void getUserByLogin() {
         Assertions.assertEquals("name1", userDAO.getUserByLogin("user1login").getName());
+        Assertions.assertNull(userDAO.getUserByLogin("unknownLogin"));
     }
 
     @Test

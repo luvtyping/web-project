@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.jdbc.Sql;
+import org.web.project.entity.CartItem;
+import org.web.project.mappers.CartMapper;
 
 @JdbcTest
 @Sql({"classpath:dbSchema.sql", "classpath:data.sql"})
@@ -23,16 +26,18 @@ class CartDAOImplTest {
 
     @Test
     void getTheCartByLogin() {
-        Assertions.assertEquals(2, cartDAO.getTheCartByLogin("user1login").size());
+        Assertions.assertEquals(5, cartDAO.getCartItemsByLogin("user1login").size());
     }
 
     @Test
     void addToTheCart() {
-        Assertions.assertTrue(cartDAO.addToTheCart("book 1", "user1login"));
+        Assertions.assertTrue(cartDAO.addToTheCart("Book one", "user1login"));
     }
 
     @Test
     void deleteFromTheCart() {
-        Assertions.assertTrue(cartDAO.deleteFromTheCart("book 3", "user1login"));
+        Assertions.assertTrue(cartDAO.deleteFromTheCart("Book three", "user1login"));
+        Assertions.assertTrue(cartDAO.deleteFromTheCart("Book two", "user1login"));
+        Assertions.assertEquals(3, cartDAO.getCartItemsByLogin("user1login").size());
     }
 }

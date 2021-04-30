@@ -29,10 +29,9 @@ class BookDAOImplTest {
 
     @Test
     void getBookByName() {
-        Assertions.assertEquals("book 1", bookDAO.getBookByName("book 1").getName());
-        Assertions.assertEquals("book 2", bookDAO.getBookByName("book 2").getName());
-        Assertions.assertEquals("book 3", bookDAO.getBookByName("book 3").getName());
-        Assertions.assertEquals("book 4", bookDAO.getBookByName("book 4").getName());
+        Assertions.assertEquals("Book one", bookDAO.getBookByName("Book one").getName());
+        Assertions.assertEquals("Book three", bookDAO.getBookByName("Book three").getName());
+        Assertions.assertNull(bookDAO.getBookByName("unknown"));
     }
 
     @Test
@@ -46,8 +45,16 @@ class BookDAOImplTest {
     @Test
     void getBooksBySearchFilters() {
         Assertions.assertEquals(2, bookDAO.getBooksBySearchFilters("", "", "", "Роман").size());
-        Assertions.assertEquals(2, bookDAO.getBooksBySearchFilters("", "Author R.T.", "", "").size());
-        Assertions.assertEquals(1, bookDAO.getBooksBySearchFilters("", "Author R.T.", "1500", "").size());
+        Assertions.assertEquals(2, bookDAO.getBooksBySearchFilters("", "Author A.", "", "").size());
+        Assertions.assertEquals(1, bookDAO.getBooksBySearchFilters("", "Author A.", "1500", "").size());
         Assertions.assertEquals(0, bookDAO.getBooksBySearchFilters("", "", "1000", "").size());
+        Assertions.assertEquals(4, bookDAO.getBooksBySearchFilters("", "", "", "").size());
+    }
+
+    @Test
+    void deleteBook() {
+        Assertions.assertTrue(bookDAO.deleteBook("Book three"));
+        Assertions.assertNull(bookDAO.getBookByName("Book three"));
+        Assertions.assertFalse(bookDAO.deleteBook("unknown"));
     }
 }
