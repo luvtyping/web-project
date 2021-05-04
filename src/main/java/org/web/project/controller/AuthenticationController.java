@@ -16,10 +16,18 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthenticationController {
-    @Autowired
     private UserService userService;
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, Model model) {
@@ -30,12 +38,11 @@ public class AuthenticationController {
 
     @GetMapping("/registration")
     public String registration(@RequestParam(required = false) String error, Model model) {
-        model.addAttribute("user", new User());
-
         if (error != null) {
             if (error.equals("userAlreadyExists"))
                 model.addAttribute("errorMessage", "Логин занят другим пользователем");
         }
+        model.addAttribute("user", new User());
         return "registration";
     }
 
@@ -44,7 +51,7 @@ public class AuthenticationController {
         if (bindingResult.hasErrors())
             return "registration";
 
-        if (userService.getUserByLogin(user.getLogin()).getLogin() != null)
+        if (userService.getUserByLogin(user.getLogin()) != null)
             return "redirect:/registration?error=userAlreadyExists";
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -58,4 +65,8 @@ public class AuthenticationController {
         return "login";
     }
 
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
 }

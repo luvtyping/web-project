@@ -7,8 +7,12 @@ import org.web.project.entity.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     public User getUserByLogin(String login) {

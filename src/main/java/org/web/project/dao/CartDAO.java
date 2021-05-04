@@ -1,14 +1,11 @@
 package org.web.project.dao;
 
-import org.web.project.entity.Cart;
+import org.web.project.entity.CartItem;
 
 import java.util.List;
 
 public interface CartDAO {
-    // TODO: 30.03.2021 delete???
-//    List<BookInCart> getBooksInTheCart();
-
-    List<Cart> getTheCartByLogin(String login);
+    List<CartItem> getCartItemsByLogin(String login);
 
     boolean addToTheCart(String bookName, String login);
 

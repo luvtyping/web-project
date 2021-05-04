@@ -9,11 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.web.project.service.BookService;
 
 @RestController
-public class BookPopupController {
-    @Autowired
+public class PopupController {
     private BookService bookService;
-    @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @Autowired
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping("/popup")
     public String getBookPopup(@RequestParam String name) {

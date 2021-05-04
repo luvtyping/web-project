@@ -9,7 +9,9 @@ public interface BookService {
 
     Book getBookByName(String name);
 
-    boolean createBook(Book book);
+    boolean addBook(Book book);
 
     List<Book> getBooksBySearchFilters(String name, String author, String price, String genre);
+
+    boolean deleteBook(String name);
 }

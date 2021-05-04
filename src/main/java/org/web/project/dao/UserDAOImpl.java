@@ -10,21 +10,24 @@ import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Autowired
-    private UserMapper userMapper;
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<User> getUsers() {
         return jdbcTemplate.query(
-                "SELECT * FROM users JOIN authorized_data ON users.login=authorized_data.login", userMapper);
+                "SELECT * FROM users JOIN authorized_data ON users.login=authorized_data.login", new UserMapper());
     }
 
     @Override
     public User getUserByLogin(String login) {
-        return jdbcTemplate.queryForObject(
-                "SELECT * FROM users JOIN authorized_data ON users.login=authorized_data.login WHERE login=?", userMapper, login);
+        return jdbcTemplate.query(
+                "SELECT * FROM users JOIN authorized_data ON users.login=authorized_data.login WHERE users.login=?",
+                new UserMapper(), login).stream().findFirst().orElse(null);
     }
 
     @Override
@@ -39,11 +42,6 @@ public class UserDAOImpl implements UserDAO {
                 user.getLogin(),
                 user.getPassword()
         );
-
-        String role = user.getRole().equals("MANAGER") ? "managers" : "customers";
-        int updateRole = jdbcTemplate.update("INSERT INTO " + role + " VALUES(?)",
-                user.getLogin());
-
-        return (updateUsers != 0 && updateAuthorizedData != 0 && updateRole != 0);
+        return (updateUsers != 0 && updateAuthorizedData != 0);
     }
 }

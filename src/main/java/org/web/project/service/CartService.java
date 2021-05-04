@@ -1,11 +1,11 @@
 package org.web.project.service;
 
-import org.web.project.entity.Cart;
+import org.web.project.entity.CartItem;
 
 import java.util.List;
 
 public interface CartService {
-    List<Cart> getTheCartByLogin(String login);
+    List<CartItem> getCartItemsByLogin(String login);
 
     boolean addToTheCart(String bookName, String login);
 

@@ -9,17 +9,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.web.project.service.BookService;
 
 @RestController
-public class BookSearchController {
-    @Autowired
+public class SearchController {
     private BookService bookService;
-    @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @Autowired
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @GetMapping("/search")
-    public String getBooksByFilters(@RequestParam(value = "name", required = false) String name,
-                                    @RequestParam(value = "author", required = false) String author,
-                                    @RequestParam(value = "genre", required = false) String genre,
-                                    @RequestParam(value = "price", required = false) String price) {
+    public String getBooksByFilters(@RequestParam(required = false) String name,
+                                    @RequestParam(required = false) String author,
+                                    @RequestParam(required = false) String genre,
+                                    @RequestParam(required = false) String price) {
         String json = "";
         try {
             json = objectMapper.writeValueAsString(

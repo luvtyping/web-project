@@ -7,38 +7,39 @@ import org.web.project.entity.Book;
 import org.web.project.mappers.BookMapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class BookDAOImpl implements BookDAO {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Autowired
-    private BookMapper bookMapper;
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Book> getBooks() {
         return jdbcTemplate.query(
                 "SELECT * FROM books JOIN books_genres " +
-                        "ON books.book_name=books_genres.book_name", bookMapper);
+                        "ON books.book_name=books_genres.book_name", new BookMapper());
     }
 
     @Override
     public Book getBookByName(String name) {
-        return jdbcTemplate.queryForObject(
+        return jdbcTemplate.query(
                 "SELECT * FROM books JOIN books_genres " +
-                        "ON books.book_name=books_genres.book_name WHERE books_genres.book_name=?", bookMapper, name);
-
+                        "ON books.book_name=books_genres.book_name WHERE books_genres.book_name=?",
+                new BookMapper(), name).stream().findFirst().orElse(null);
     }
 
     @Override
     public boolean addBook(Book book) {
         int updateBooks = jdbcTemplate.update("INSERT INTO books VALUES(?,?,?,?,?)",
                 book.getName(),
-                book.getAuthor(),
                 book.getPublishYear(),
+                book.getDescription(),
                 book.getPrice(),
-                book.getDescription()
+                book.getAuthor()
         );
         int updateBooksGenres = jdbcTemplate.update("INSERT INTO books_genres VALUES(?,?)",
                 book.getName(),
@@ -56,9 +57,15 @@ public class BookDAOImpl implements BookDAO {
 
         return jdbcTemplate.query(
                 "SELECT * FROM books JOIN books_genres ON books.book_name=books_genres.book_name " +
-                        "WHERE books.book_name LIKE ? AND genre LIKE ? AND author LIKE ?",
-                bookMapper, bookName, bookGenre, bookAuthor, bookPrice);
+                        "WHERE books.book_name LIKE ? AND genre LIKE ? AND author LIKE ? AND price < ?",
+                new BookMapper(), bookName, bookGenre, bookAuthor, bookPrice);
     }
 
-
+    @Override
+    public boolean deleteBook(String name) {
+        int deleteFromCart = jdbcTemplate.update("DELETE FROM cart WHERE book_name=?", name);
+        int deleteFromBooksGenres = jdbcTemplate.update("DELETE FROM books_genres WHERE book_name=?", name);
+        int deleteFromBooks = jdbcTemplate.update("DELETE FROM books WHERE book_name=?", name);
+        return (deleteFromCart != 0 && deleteFromBooksGenres != 0 && deleteFromBooks != 0);
+    }
 }

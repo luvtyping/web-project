@@ -12,4 +12,6 @@ public interface BookDAO {
     boolean addBook(Book book);
 
     List<Book> getBooksBySearchFilters(String name, String author, String price, String genre);
+
+    boolean deleteBook(String name);
 }

@@ -2,16 +2,16 @@ package org.web.project.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import org.web.project.entity.Cart;
+import org.web.project.entity.CartItem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class CartMapper implements RowMapper<Cart> {
+public class CartMapper implements RowMapper<CartItem> {
     @Override
-    public Cart mapRow(ResultSet resultSet, int i) throws SQLException {
-        Cart cart = new Cart();
+    public CartItem mapRow(ResultSet resultSet, int i) throws SQLException {
+        CartItem cart = new CartItem();
         cart.setBookName(resultSet.getString("book_name"));
         cart.setUserLogin(resultSet.getString("user_login"));
         return cart;
